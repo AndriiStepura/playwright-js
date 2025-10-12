@@ -1,19 +1,21 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test('test', async ({ page }) => {
+  // Webkit throw timeout for default so let's increase to 60s but it still failing so let's left it for future
+  // TODO take a look why webkit is failing here
+  // test.setTimeout(60000);
+  // await page.goto('https://paydo.com/', { timeout: 60000 });
+  await page.goto('https://paydo.com/');  
+  await expect(page.getByRole('link', { name: 'Open account' }).first()).toBeVisible();
+  await page.getByRole('link', { name: 'Open account' }).first().click();
+  // await expect(page.locator('.mat-form-field-flex').first()).toBeVisible();
+  await expect(page.locator('.mat-form-field-flex')).toHaveCount(3);
+  await expect(page.getByPlaceholder('Enter email')).toBeVisible();
+  await expect(page.getByPlaceholder('Enter password')).toHaveCount(2);
+  await expect(page.getByPlaceholder('Enter password').first()).toBeVisible();
+  await expect(page.getByPlaceholder('Enter password').last()).toBeVisible();
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  await page.getByRole('button', { name: 'Create an account' }).isDisabled();
+  await expect(page.getByRole('link', { name: 'Switch to create Business' })).toBeVisible();
 });
