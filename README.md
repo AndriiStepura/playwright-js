@@ -21,17 +21,17 @@ Node.js with npm should be installed, can be download at - https://nodejs.org/en
 ### To run tests
 ```npx playwright test```
 
-### To run tests with headed mode use --headed flag
+
+**Tips:**  
+#### To run tests with headed mode use --headed flag (See browsers windows)
 ```npx playwright test --headed```
 
-*Tips:*
-```
-See the browser window: add --headed.
+#### Run a single project/browser 
+```npx playwright test --project=chromium```
 
-Run a single project/browser: --project=chromium.
+#### Run one test file ####  
+```npx playwright test tests/example.spec.js```
 
-Run one file: npx playwright test tests/example.spec.ts.
-
-Open testing UI: --ui.
-```
+#### Open testing UI ####    
+```npx playwright test --ui```
 
