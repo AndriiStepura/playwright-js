@@ -1,7 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test('test', async ({ page }) => {
+test('[HP-1] Create account page elements are displayed', async ({ page }) => {
   // Webkit throw timeout for default so let's increase to 60s but it still failing so let's left it for future
   // TODO take a look why webkit is failing here
   // test.setTimeout(60000);
@@ -29,3 +29,6 @@ test('test', async ({ page }) => {
   await expect(page.locator('ngp-field-requirements-item').filter({ hasText: 'Uppercase letter' })).toBeVisible();
   await expect(page.locator('ngp-field-requirements-item').filter({ hasText: 'At least 1 number' })).toBeVisible();
 });
+
+
+
