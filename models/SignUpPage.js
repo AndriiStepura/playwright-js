@@ -39,19 +39,18 @@ class SignUpPage {
   }
 
   async verifySignUpForm() { 
-  await expect(this.createAPersonalAccountHeader).toHaveText('Create a personal account');
     // Sign Up form fields asserts
-  await expect(this.input_fields).toHaveCount(3);
-  await expect(this.email_field).toBeVisible();
-  await expect(this.password_fields).toHaveCount(2);
-  await expect(this.enter_password_field).toBeVisible();
-  await expect(this.password_confirm_field).toBeVisible();
-  await expect(this.passwordRequirementsLabels).toHaveText([
-    `Min.8 characters`,
-    `Lowercase letter`,
-    `Uppercase letter`,
-    `At least 1 number`
-  ]);
+    await expect(this.input_fields).toHaveCount(3);
+    await expect(this.email_field).toBeVisible();
+    await expect(this.password_fields).toHaveCount(2);
+    await expect(this.enter_password_field).toBeVisible();
+    await expect(this.password_confirm_field).toBeVisible();
+    await expect(this.passwordRequirementsLabels).toHaveText([
+        `Min.8 characters`,
+        `Lowercase letter`,
+        `Uppercase letter`,
+        `At least 1 number`
+    ]);
   }
 
   

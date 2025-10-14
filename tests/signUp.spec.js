@@ -9,12 +9,13 @@ test('[HP-1] Create account page elements are displayed', async ({ page }) => {
   const  signUp = new SignUpPage(page);
   
   await signUp.gotoSignUpPage();  
-  await common.verifyHeader()
-  
+  await common.verifyPageHeader()  
+  await expect(signUp.createAPersonalAccountHeader).toHaveText('Create a personal account');
   await signUp.verifySignUpForm();
   /// Button should be inactive before data populated in fields
   await expect(signUp.create_account_button).toBeDisabled();
   
   /// Switch to Business account
   await expect(signUp.swithcToCreateBusinessAccountLink).toBeVisible();
+  
 });
