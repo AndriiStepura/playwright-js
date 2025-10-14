@@ -12,7 +12,6 @@ class SignUpPage {
     this.openAccountLink = page.locator('.banner-section__actions').locator('a', {hasText: 'Open account'});    
 
     // Form elements
-    this.createAPersonalAccountHeader = page.locator('h1');
     this.input_fields = page.locator('.mat-form-field-flex');
     this.email_field = page.getByPlaceholder('Enter email');
     this.password_fields = page.getByPlaceholder('Enter password');

@@ -12,11 +12,13 @@ class Common {
     this.backToHomeLink = page.getByRole('link', { name: 'Back to Homepage' });
     this.logInLink = page.getByRole('link', { name: 'Log In' });
 
+    this.pageH1 = page.locator('h1');
+
     // Policy link
     // TODO currently issue with policy link, it's missed on this page
   }
   
-  async verifyHeader() { 
+  async verifyPageHeader() { 
     await expect(this.logoAtTop).toBeVisible();
     await expect(this.backToHomeLink).toBeVisible();
     await expect(this.logInLink).toBeVisible();
