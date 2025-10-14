@@ -8,8 +8,9 @@ class SignUpPage {
   
   constructor(page) {
     this.page = page;
-    // Elements from homepage TODO move to own class for DRY
-    this.openAccountLink = page.locator('.banner-section__actions').locator('a', {hasText: 'Open account'});    
+
+    // Elements from homepage TODO move to own class for DRY later when page created
+    this.openAccountLink = page.locator('.banner-section__actions').locator('a', {hasText: 'Open account'});
 
     // Form elements
     this.input_fields = page.locator('.mat-form-field-flex');
@@ -21,10 +22,11 @@ class SignUpPage {
     this.passwordRequirementsLabels = page.locator('.ngp-field-requirements-item__label');
 
     // Other elements
-    this.swithcToCreateBusinessAccountLink = page.getByRole('link', { name: 'Switch to create Business account' });
+    this.swithcToCreateBusinessAccountLink = page.getByText('link', { name: 'Switch to create Business account' });
 
-    // Policy link
-    // TODO currently issue with policy link, it's missed on this page
+    // Policy link    
+    this.policyText = page.locator('auth-footer');
+    this.policyLink = page.locator('auth-footer').locator('a');
   }
   
   async gotoSignUpPage() { 
@@ -49,9 +51,17 @@ class SignUpPage {
         `Lowercase letter`,
         `Uppercase letter`,
         `At least 1 number`
-    ]);
+    ]);    
   }
 
+  async verifyPolicyFooter(expectedTextPrefix, expectedLinkText, expectedLinkURL) { 
+    await expect(this.policyText).toBeVisible();
+    await expect(this.policyText).toContainText(expectedTextPrefix+ "  " + expectedLinkText);
+
+    await expect(this.policyLink).toBeVisible();
+    await expect(this.policyLink).toHaveText(expectedLinkText);
+    await expect(this.policyLink).toHaveAttribute('href', expectedLinkURL);
+  }
   
 }
 module.exports = { SignUpPage };

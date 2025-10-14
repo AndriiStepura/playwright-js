@@ -13,9 +13,6 @@ class Common {
     this.logInLink = page.getByRole('link', { name: 'Log In' });
 
     this.pageH1 = page.locator('h1');
-
-    // Policy link
-    // TODO currently issue with policy link, it's missed on this page
   }
   
   async verifyPageHeader() { 
