@@ -10,12 +10,9 @@ class SignUpPage {
     this.page = page;
     // Elements from homepage TODO move to own class for DRY
     this.openAccountLink = page.locator('.banner-section__actions').locator('a', {hasText: 'Open account'});    
-    // Element from common TODO move to own class for DRY
-    this.logInLink = page.getByRole('link', { name: 'Log In' });
-    this.logoAtTop = page.getByAltText('Paydo logo');
 
     // Form elements
-    this.createAPersonalAccountHeader = page.locator('h1', { hasText: 'Create a personal account' });
+    this.createAPersonalAccountHeader = page.locator('h1');
     this.input_fields = page.locator('.mat-form-field-flex');
     this.email_field = page.getByPlaceholder('Enter email');
     this.password_fields = page.getByPlaceholder('Enter password');
@@ -26,21 +23,10 @@ class SignUpPage {
 
     // Other elements
     this.swithcToCreateBusinessAccountLink = page.getByRole('link', { name: 'Switch to create Business account' });
-    this.backToHomeLink = page.getByRole('link', { name: 'Back to Homepage' });
 
     // Policy link
     // TODO currently issue with policy link, it's missed on this page
   }
-
-//   async getStarted() {
-//     await this.getStartedLink.first().click();
-//     await expect(this.gettingStartedHeader).toBeVisible();
-//   }
-
-//   async pageObjectModel() {
-//     await this.getStarted();
-//     await this.pomLink.click();
-//   }
   
   async gotoSignUpPage() { 
     // Webkit throw timeout for default so let's increase to 60s but it still failing so let's left it for future
@@ -52,5 +38,22 @@ class SignUpPage {
     await this.openAccountLink.click();
   }
 
+  async verifySignUpForm() { 
+  await expect(this.createAPersonalAccountHeader).toHaveText('Create a personal account');
+    // Sign Up form fields asserts
+  await expect(this.input_fields).toHaveCount(3);
+  await expect(this.email_field).toBeVisible();
+  await expect(this.password_fields).toHaveCount(2);
+  await expect(this.enter_password_field).toBeVisible();
+  await expect(this.password_confirm_field).toBeVisible();
+  await expect(this.passwordRequirementsLabels).toHaveText([
+    `Min.8 characters`,
+    `Lowercase letter`,
+    `Uppercase letter`,
+    `At least 1 number`
+  ]);
+  }
+
+  
 }
 module.exports = { SignUpPage };
