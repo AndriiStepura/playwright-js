@@ -62,6 +62,12 @@ class SignUpPage {
     await expect(this.policyLink).toHaveText(expectedLinkText);
     await expect(this.policyLink).toHaveAttribute('href', expectedLinkURL);
   }
+
+  
+  async enterPasswodAndConfirmPassword(password, passwordConfirm) { 
+    await this.enter_password_field.fill(password);
+    await this.password_confirm_field.fill(passwordConfirm);
+  }
   
 }
 module.exports = { SignUpPage };
