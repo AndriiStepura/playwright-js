@@ -13,6 +13,9 @@ class Common {
     this.logInLink = page.getByRole('link', { name: 'Log In' });
 
     this.pageH1 = page.locator('h1');
+
+    this.infoBlockMessage = page.locator('ngp-info-block');
+    
   }
   
   async verifyPageHeader() { 
