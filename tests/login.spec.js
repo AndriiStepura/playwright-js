@@ -1,6 +1,5 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-const { Common } = require('../models/Common');
 const { LoginPage } = require('../models/LoginPage');
 
 test('[ERR-1] Verify login form errors', async ({ page }) => {  

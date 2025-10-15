@@ -1,8 +1,7 @@
 // @ts-check
 const { expect } = require('@playwright/test');
-const { Common } = require('../models/Common');
-/** @type {Common} */
-let commonElements;
+const { Common } = require('./Common');
+const { HomePage } = require('./HomePage');
 
 class LoginPage {
   /** 
@@ -10,22 +9,19 @@ class LoginPage {
    */  
   
   constructor(page) {    
-    this.page = page;    
-    commonElements = new Common(page);
-
-    // Elements from homepage TODO move to own class for DRY later when page created
-    this.logInLink = page.getByRole('link', { name: 'Log In' });    
-
+    this.page = page;
+    this.common = new Common(page);
+    this.home = new HomePage(page);
+    
     this.email_field = page.getByRole('textbox', { name: 'Enter email' });
     this.password_field = page.getByRole('textbox', { name: 'Enter password' });
     this.loginFormButton = page.getByRole('button', { name: 'Log in' });    
   }
 
   async gotoLoginPage() { 
-    // TODO move to common
     await this.page.goto('https://paydo.com/', { waitUntil: "domcontentloaded"});
-    await expect(this.logInLink).toBeVisible();
-    await this.logInLink.click();
+    await expect(this.home.logInLink).toBeVisible();
+    await this.home.logInLink.click();
   }
 
   // Login form fill and post
@@ -45,10 +41,10 @@ class LoginPage {
   }
 
   async loginErrorDisplayedWithText(expectedErrorText) {        
-    await expect(commonElements.infoBlockMessage).toBeVisible();    
+    await expect(this.common.infoBlockMessage).toBeVisible();    
     // check that styled as error
-    await expect(commonElements.infoBlockMessage).toHaveAttribute('color','error');
-    await expect(commonElements.infoBlockMessage).toHaveText(expectedErrorText)
+    await expect(this.common.infoBlockMessage).toHaveAttribute('color','error');
+    await expect(this.common.infoBlockMessage).toHaveText(expectedErrorText);
   }
 
 }

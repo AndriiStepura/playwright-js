@@ -4,8 +4,8 @@ const { Common } = require('../models/Common');
 const { SignUpPage } = require('../models/SignUpPage');
 
 test('[HP-1] Create account page elements are displayed', async ({ page }) => {
-  const  common = new Common(page);
-  const  signUp = new SignUpPage(page);
+  const common = new Common(page);
+  const signUp = new SignUpPage(page);
   
   await signUp.gotoSignUpPage();  
   await common.verifyPageHeader()  
@@ -22,12 +22,12 @@ test('[HP-1] Create account page elements are displayed', async ({ page }) => {
 });
 
 
-test('[HP-2] Create account page create button enabled', async ({ page }) => {
-  const  common = new Common(page);
-  const  signUp = new SignUpPage(page);
+test('[HP-2] Create account page - create button enabled', async ({ page }) => {
+  const common = new Common(page);
+  const signUp = new SignUpPage(page);
   
   await signUp.gotoSignUpPage();  
-  await common.verifyPageHeader()  
+  await common.verifyPageHeader();
   await expect(common.pageH1).toHaveText('Create a personal account');
   await signUp.verifySignUpForm();
   // Button should be inactive before data populated in fields

@@ -1,5 +1,6 @@
 // @ts-check
 const { expect } = require('@playwright/test');
+const { HomePage } = require('./HomePage');
 
 class SignUpPage {
   /** 
@@ -8,10 +9,8 @@ class SignUpPage {
   
   constructor(page) {
     this.page = page;
-
-    // Elements from homepage TODO move to own class for DRY later when page created
-    this.openAccountLink = page.locator('.banner-section__actions').locator('a', {hasText: 'Open account'});
-
+    this.home = new HomePage(page);
+    
     // Form elements
     this.input_fields = page.locator('.mat-form-field-flex');
     this.email_field = page.getByPlaceholder('Enter email');
@@ -30,24 +29,24 @@ class SignUpPage {
   }
   
   async gotoSignUpPage() { 
-    // TODO move to common
-    // Webkit throw timeout error for default values as it's never finish wait for page load
-    // page.goto: Timeout 30000ms exceeded.
-    // Call log:
-    // - navigating to "https://paydo.com/", waiting until "load"
-    // So we can use dom content load here instead
     await this.page.goto('https://paydo.com/', { waitUntil: "domcontentloaded"});
-    await expect(this.openAccountLink).toBeVisible();
-    await this.openAccountLink.click();
+    await expect(this.home.openAccountLink).toBeVisible();
+    await this.home.openAccountLink.click();
   }
 
   async verifySignUpForm() { 
     // Sign Up form fields asserts
     await expect(this.input_fields).toHaveCount(3);
     await expect(this.email_field).toBeVisible();
+    await expect(this.email_field).toBeEditable();
+
     await expect(this.password_fields).toHaveCount(2);
     await expect(this.enter_password_field).toBeVisible();
+    await expect(this.enter_password_field).toBeEditable();
+
     await expect(this.password_confirm_field).toBeVisible();
+    await expect(this.password_confirm_field).toBeEditable();
+
     await expect(this.passwordRequirementsLabels).toHaveText([
         `Min.8 characters`,
         `Lowercase letter`,

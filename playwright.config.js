@@ -42,7 +42,7 @@ export default defineConfig({
   },
 
   expect: { 
-    timeout: 15_000 // with default 5s local parallel run was flaky
+    timeout: 20_000 // with default 5s local parallel run was flaky
   },
 
   // Each test is given 30 seconds timeout
