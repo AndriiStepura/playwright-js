@@ -28,6 +28,12 @@ Node.js with npm should be installed, can be download at - https://nodejs.org/en
 
 #### Run a single project/browser 
 ```npx playwright test --project=chromium```
+```npx playwright test --project=firefox```
+```npx playwright test --project=webkit```
+
+#### Run with more workers
+```npx playwright test --workers 9```
+
 
 #### Run one test file ####  
 ```npx playwright test tests/example.spec.js```
@@ -35,3 +41,6 @@ Node.js with npm should be installed, can be download at - https://nodejs.org/en
 #### Open testing UI ####    
 ```npx playwright test --ui```
 
+#### Notes for future maintanability improvements
+BDD layer for wrapping - https://vitalets.github.io/playwright-bdd/#/
+Better expect printer - https://github.com/playwright-community/expect-playwright
