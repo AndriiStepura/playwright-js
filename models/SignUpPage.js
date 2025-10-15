@@ -30,11 +30,13 @@ class SignUpPage {
   }
   
   async gotoSignUpPage() { 
-    // Webkit throw timeout for default so let's increase to 60s but it still failing so let's left it for future
-    // TODO take a look why webkit is failing here
-    // test.setTimeout(60000);
-    // await page.goto('https://paydo.com/', { timeout: 60000 });
-    await this.page.goto('https://paydo.com/');
+    // TODO move to common
+    // Webkit throw timeout error for default values as it's never finish wait for page load
+    // page.goto: Timeout 30000ms exceeded.
+    // Call log:
+    // - navigating to "https://paydo.com/", waiting until "load"
+    // So we can use dom content load here instead
+    await this.page.goto('https://paydo.com/', { waitUntil: "domcontentloaded"});
     await expect(this.openAccountLink).toBeVisible();
     await this.openAccountLink.click();
   }

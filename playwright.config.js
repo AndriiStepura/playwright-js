@@ -24,6 +24,10 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
+  
+  // Maximum execution limit to avoid loops if some tests will stuck
+  globalTimeout: 3*60*1000,
+
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -31,7 +35,19 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    
+    // with default timeouts local parallel run was flaky
+    actionTimeout: 20 * 1000, 
+    navigationTimeout: 30 * 1000,
   },
+
+  expect: { 
+    timeout: 15_000 // with default 5s local parallel run was flaky
+  },
+
+  // Each test is given 30 seconds timeout
+  timeout: 60 * 1000,
+
 
   /* Configure projects for major browsers */
   projects: [
@@ -77,5 +93,6 @@ export default defineConfig({
   //   url: 'http://localhost:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
+  
 });
 
